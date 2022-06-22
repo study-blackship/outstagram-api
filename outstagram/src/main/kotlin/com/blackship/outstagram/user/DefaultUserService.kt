@@ -8,6 +8,7 @@ class DefaultUserService(
 ) : UserService {
 
     override fun registerUser(user: User) {
+        userRepository.save(user)
     }
 
 
