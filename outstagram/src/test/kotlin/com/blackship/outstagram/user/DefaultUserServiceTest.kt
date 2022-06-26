@@ -1,8 +1,6 @@
 package com.blackship.outstagram.user
 
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 
 internal class DefaultUserServiceTest {
 
@@ -17,12 +15,10 @@ internal class DefaultUserServiceTest {
             spyUserRepository
         )
     }
-
-    @Test
-    internal fun registerUser_callsSave_inUserRepository() {
-        val user = getUserDummy()
-        defaultUserService.registerUser(user)
-        assertThat(spyUserRepository.saveArguments).isEqualTo(user)
-    }
-
+//    @Test
+//    internal fun registerUser_callsSave_inUserRepository() {
+//        val user = getUserDummy()
+//        defaultUserService.registerUser(user)
+//        assertThat(spyUserRepository.saveArguments).isEqualTo(user)
+//    }
 }

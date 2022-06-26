@@ -7,8 +7,7 @@ class DefaultUserService(
     private val userRepository: UserRepository
 ) : UserService {
 
-    override fun registerUser(user: User) {
-        userRepository.save(user)
+    override fun registerUser(user: UserDto) {
     }
 
 
