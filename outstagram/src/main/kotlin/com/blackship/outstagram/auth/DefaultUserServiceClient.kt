@@ -12,9 +12,13 @@ class DefaultUserServiceClient(
         resourceServerName: String,
         resourceServerId: String
     ): AuthUserDto {
-        userService.getUserByResourceServer(resourceServerName, resourceServerId)
+        val userDto = userService.getUserByResourceServer(resourceServerName, resourceServerId)
         return AuthUserDto(
-            id = null, "", "", "", ""
+            id = userDto.id,
+            resourceServerId = userDto.resourceServerId,
+            resourceServerName = userDto.resourceServerName,
+            email = userDto.email,
+            profileImage = userDto.profileImage
         )
     }
 
