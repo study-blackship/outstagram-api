@@ -5,8 +5,12 @@ import org.springframework.stereotype.Component
 @Component
 class UserMapper {
 
-    fun dtoToDomain(userDto: UserDto): User {
-        TODO()
-    }
+    fun toDomainBy(userDto: UserDto) = User(
+        id = userDto.id,
+        resourceServerId = userDto.resourceServerId,
+        resourceServerName = userDto.resourceServerName,
+        _email = userDto.email,
+        _profileImage = userDto.profileImage
+    )
 
 }
