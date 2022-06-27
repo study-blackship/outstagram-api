@@ -15,6 +15,7 @@ class DefaultUserService(
         userRepository.save(user)
     }
 
+    @Transactional(readOnly = true)
     override fun getUserByResourceServer(
         resourceServerName: String,
         resourceServerId: String
