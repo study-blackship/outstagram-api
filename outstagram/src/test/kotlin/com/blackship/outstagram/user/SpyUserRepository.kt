@@ -8,16 +8,29 @@ import org.springframework.data.repository.query.FluentQuery
 import java.util.*
 import java.util.function.Function
 
-class SpyUserRepository : UserRepository {
+class SpyUserRepository: UserRepository {
+
     var saveArguments: User? = null
     var saveResult: User = getUserDummy()
 
-    override fun <S : User?> save(entity: S): S {
+    lateinit var findByResourceServerNameAndResourceServerIdArgumentsResourceServerName: String
+    lateinit var findByResourceServerNameAndResourceServerIdArgumentsResourceServerId: String
+    var findByResourceServerNameAndResourceServerIdReturns: User? = getUserDummy()
+    override fun findByResourceServerNameAndResourceServerId(
+        resourceServerName: String,
+        resourceServerId: String
+    ): User? {
+        findByResourceServerNameAndResourceServerIdArgumentsResourceServerName = resourceServerName
+        findByResourceServerNameAndResourceServerIdArgumentsResourceServerId = resourceServerId
+        return findByResourceServerNameAndResourceServerIdReturns
+    }
+
+    override fun <S: User?> save(entity: S): S {
         saveArguments = entity
         return saveResult as S
     }
 
-    override fun <S : User?> saveAll(entities: MutableIterable<S>): MutableList<S> {
+    override fun <S: User?> saveAll(entities: MutableIterable<S>): MutableList<S> {
         TODO("Not yet implemented")
     }
 
@@ -29,11 +42,14 @@ class SpyUserRepository : UserRepository {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?> findAll(example: Example<S>): MutableList<S> {
+    override fun <S: User?> findAll(example: Example<S>): MutableList<S> {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?> findAll(example: Example<S>, sort: Sort): MutableList<S> {
+    override fun <S: User?> findAll(
+        example: Example<S>,
+        sort: Sort
+    ): MutableList<S> {
         TODO("Not yet implemented")
     }
 
@@ -41,7 +57,10 @@ class SpyUserRepository : UserRepository {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?> findAll(example: Example<S>, pageable: Pageable): Page<S> {
+    override fun <S: User?> findAll(
+        example: Example<S>,
+        pageable: Pageable
+    ): Page<S> {
         TODO("Not yet implemented")
     }
 
@@ -53,7 +72,7 @@ class SpyUserRepository : UserRepository {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?> count(example: Example<S>): Long {
+    override fun <S: User?> count(example: Example<S>): Long {
         TODO("Not yet implemented")
     }
 
@@ -73,15 +92,15 @@ class SpyUserRepository : UserRepository {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?> findOne(example: Example<S>): Optional<S> {
+    override fun <S: User?> findOne(example: Example<S>): Optional<S> {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?> exists(example: Example<S>): Boolean {
+    override fun <S: User?> exists(example: Example<S>): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?, R : Any?> findBy(
+    override fun <S: User?, R: Any?> findBy(
         example: Example<S>,
         queryFunction: Function<FluentQuery.FetchableFluentQuery<S>, R>
     ): R {
@@ -92,11 +111,11 @@ class SpyUserRepository : UserRepository {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?> saveAndFlush(entity: S): S {
+    override fun <S: User?> saveAndFlush(entity: S): S {
         TODO("Not yet implemented")
     }
 
-    override fun <S : User?> saveAllAndFlush(entities: MutableIterable<S>): MutableList<S> {
+    override fun <S: User?> saveAllAndFlush(entities: MutableIterable<S>): MutableList<S> {
         TODO("Not yet implemented")
     }
 

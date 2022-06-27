@@ -2,8 +2,11 @@ package com.blackship.outstagram.user
 
 interface UserService {
 
-    fun registerUser(user: UserDto)
+    fun registerUser(userDto: UserDto)
 
-    fun getUserBy(): UserDto
+    fun getUserByResourceServer(
+        resourceServerName: String,
+        resourceServerId: String
+    ): UserDto
 
 }

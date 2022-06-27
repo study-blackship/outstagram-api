@@ -7,16 +7,16 @@ import javax.persistence.Id
 
 @Entity
 class User(
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long? = null,
-    private val resourceServerId: String,
-    private val resourceServerName: String,
-    private val email: String,
-    private var profileImage: String
-
+    val id: Long? = null,
+    val resourceServerId: String,
+    val resourceServerName: String,
+    private var _email: String,
+    private var _profileImage: String
 ) {
 
+    val email get() = _email
+    val profileImage get() = _profileImage
 
 }
