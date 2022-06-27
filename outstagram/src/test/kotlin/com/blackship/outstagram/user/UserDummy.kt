@@ -10,6 +10,6 @@ internal fun getUserDummy(
     id = id,
     resourceServerId = resourceServerId,
     resourceServerName = resourceServerName,
-    email = email,
-    profileImage = profileImage,
+    _email = email,
+    _profileImage = profileImage,
 )
