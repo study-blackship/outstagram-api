@@ -13,4 +13,14 @@ class UserMapper {
         _profileImage = userDto.profileImage
     )
 
+    fun toDtoBy(user: User): UserDto {
+        return UserDto(
+            null,
+            "",
+            "",
+            "",
+            ""
+        )
+    }
+
 }
