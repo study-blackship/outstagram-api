@@ -4,7 +4,7 @@ interface UserService {
 
     fun registerUser(userDto: UserDto)
 
-    fun getUserBy(
+    fun getUserByResourceServer(
         resourceServerName: String,
         resourceServerId: String
     ): UserDto

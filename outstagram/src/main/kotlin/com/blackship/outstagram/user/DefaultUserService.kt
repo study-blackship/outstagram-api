@@ -15,11 +15,18 @@ class DefaultUserService(
         userRepository.save(user)
     }
 
-    override fun getUserBy(
+    override fun getUserByResourceServer(
         resourceServerName: String,
         resourceServerId: String
     ): UserDto {
-        TODO("Not yet implemented")
+        // "get user by userRepository and convert to dto"
+        return UserDto(
+            null,
+            "",
+            "",
+            "",
+            ""
+        )
     }
 
 }
