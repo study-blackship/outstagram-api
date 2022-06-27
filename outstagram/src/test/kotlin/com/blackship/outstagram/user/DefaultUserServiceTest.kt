@@ -28,4 +28,10 @@ internal class DefaultUserServiceTest {
         assertThat(spyUserMapper.toDomainByArguments).isEqualTo(userDto)
     }
 
+    @Test
+    fun registerUser_callsSave_inUserRepository() {
+        defaultUserService.registerUser(getUserDtoDummy())
+        assertThat(spyUserRepository.saveArguments).isEqualTo(spyUserMapper.toDomainByResult)
+    }
+
 }
