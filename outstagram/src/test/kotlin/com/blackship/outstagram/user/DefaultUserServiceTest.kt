@@ -34,4 +34,13 @@ internal class DefaultUserServiceTest {
         assertThat(spyUserRepository.saveArguments).isEqualTo(spyUserMapper.toDomainByResult)
     }
 
+    @Test
+    fun getUserByResourceServer_callsFindByResourceServerNameAndResourceServerId_inUserRepository() {
+        val resourceServerName = "resourceServername"
+        val resourceServerId = "resourceServerId"
+        defaultUserService.getUserByResourceServer(resourceServerName, resourceServerId)
+        assertThat(spyUserRepository.findByResourceServerNameAndResourceServerIdArgumentsResourceServerName).isEqualTo(resourceServerName)
+        assertThat(spyUserRepository.findByResourceServerNameAndResourceServerIdArgumentsResourceServerId).isEqualTo(resourceServerId)
+    }
+
 }
