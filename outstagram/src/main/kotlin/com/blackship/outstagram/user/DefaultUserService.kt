@@ -15,7 +15,10 @@ class DefaultUserService(
         userRepository.save(user)
     }
 
-    override fun getUserBy(): UserDto {
+    override fun getUserBy(
+        resourceServerName: String,
+        resourceServerId: String
+    ): UserDto {
         TODO("Not yet implemented")
     }
 
