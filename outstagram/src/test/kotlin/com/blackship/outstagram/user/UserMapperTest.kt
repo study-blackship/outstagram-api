@@ -24,4 +24,15 @@ internal class UserMapperTest {
         assertThat(user.profileImage).isEqualTo(userDto.profileImage)
     }
 
+    @Test
+    fun toDtoBy() {
+        val user = getUserDummy()
+        val userDto = userMapper.toDtoBy(user)
+        assertThat(userDto.id).isEqualTo(user.id)
+        assertThat(userDto.resourceServerId).isEqualTo(user.resourceServerId)
+        assertThat(userDto.resourceServerName).isEqualTo(user.resourceServerName)
+        assertThat(userDto.email).isEqualTo(user.email)
+        assertThat(userDto.profileImage).isEqualTo(user.profileImage)
+    }
+
 }
