@@ -1,6 +1,7 @@
 package com.blackship.outstagram.user
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatCode
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -41,6 +42,26 @@ internal class DefaultUserServiceTest {
         defaultUserService.getUserByResourceServer(resourceServerName, resourceServerId)
         assertThat(spyUserRepository.findByResourceServerNameAndResourceServerIdArgumentsResourceServerName).isEqualTo(resourceServerName)
         assertThat(spyUserRepository.findByResourceServerNameAndResourceServerIdArgumentsResourceServerId).isEqualTo(resourceServerId)
+    }
+
+    @Test
+    fun getUserByResourceServer_throwsNoSuchElementsException_when_findByResourceServerNameAndResourceServerId_isNull() {
+        spyUserRepository.findByResourceServerNameAndResourceServerIdReturns = null
+        assertThatCode { defaultUserService.getUserByResourceServer("resourceServerName", "resourceServerId") }
+                .isInstanceOf(NoSuchElementException::class.java)
+                .hasMessage("no matching user")
+    }
+
+    @Test
+    fun getUserByResourceServer_callsToDtoBy_inUserMapper_by_findByResourceServerNameAndResourceServerId_result() {
+        defaultUserService.getUserByResourceServer("resourceServerName", "resourceServerId")
+        assertThat(spyUserMapper.toDtoByArguments).isEqualTo(spyUserRepository.findByResourceServerNameAndResourceServerIdReturns)
+    }
+
+    @Test
+    fun getUserByResourceServer_returnsToDtoBy_inUserMapper() {
+        val userDto = defaultUserService.getUserByResourceServer("resourceServerName", "resourceServerId")
+        assertThat(userDto).isEqualTo(spyUserMapper.toDtoByResult)
     }
 
 }
