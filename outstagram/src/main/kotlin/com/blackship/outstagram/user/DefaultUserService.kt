@@ -19,6 +19,7 @@ class DefaultUserService(
         resourceServerName: String,
         resourceServerId: String
     ): UserDto {
+        userRepository.findByResourceServerNameAndResourceServerId(resourceServerName, resourceServerId)
         // "get user by userRepository and convert to dto"
         return UserDto(
             null,
