@@ -1,6 +1,7 @@
 package com.blackship.outstagram.user
 
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class DefaultUserService(
@@ -8,10 +9,10 @@ class DefaultUserService(
     private val userMapper: UserMapper
 ): UserService {
 
+    @Transactional
     override fun registerUser(userDto: UserDto) {
-        userMapper.toDomainBy(userDto)
-        // userDto to user by userMapper
-        // saveUser
+        val user = userMapper.toDomainBy(userDto)
+        userRepository.save(user)
     }
 
     override fun getUserBy(): UserDto {
