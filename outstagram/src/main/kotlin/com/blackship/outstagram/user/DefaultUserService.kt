@@ -9,6 +9,7 @@ class DefaultUserService(
 ): UserService {
 
     override fun registerUser(userDto: UserDto) {
+        userMapper.toDomainBy(userDto)
         // userDto to user by userMapper
         // saveUser
     }
