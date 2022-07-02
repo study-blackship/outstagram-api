@@ -1,5 +1,6 @@
 package com.blackship.outstagram.user
 
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -12,7 +13,9 @@ class User(
     val id: Long? = null,
     val resourceServerId: String,
     val resourceServerName: String,
+    @Column(name = "email")
     private var _email: String,
+    @Column(name = "profile_image")
     private var _profileImage: String
 ) {
 
