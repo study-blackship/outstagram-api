@@ -13,12 +13,18 @@ class Oauth2UserService(
 ): OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     override fun loadUser(userRequest: OAuth2UserRequest): OAuth2User? {
-        // resourceserver에서 사용자 정보를 받았을 때 해당 사용자의 회원가입 여부를 판단함
-        // oauth사용자를 가져와서
-        // 가져온 oauth사용자데이터를 가지고 사용자 서비스에서 사용자를 조회 crc card <-
-        // 만약 존재하지 않는다면 사용자 서비스에 사용자 추가 요청
-        // 가져온 사용자를 갖고 Oauth2User <- 구현한 저희만의 Oauth2User객체를 만드는것도 좋을것같아요
-        return null
+        val oAuth2User = defaultOAuth2UserService.loadUser(userRequest)
+        val userDto = userServiceClient.getUserBy(userRequest.clientRegistration.clientName, oAuth2User.name)
+        if (userDto == null)
+            userServiceClient.registerUser(
+                AuthUserDto(
+                    resourceServerId = oAuth2User.name,
+                    resourceServerName = userRequest.clientRegistration.clientName,
+                    email = oAuth2User.getAttribute<String>("email")!!,
+                    profileImage = oAuth2User.getAttribute<String>("profileImage")!!
+                )
+            )
+        return oAuth2User
     }
 
 }
