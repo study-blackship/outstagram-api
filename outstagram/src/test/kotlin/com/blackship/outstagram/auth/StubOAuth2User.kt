@@ -12,7 +12,7 @@ class StubOAuth2User: OAuth2User {
     override fun getAttributes(): MutableMap<String, Any> {
         return mutableMapOf(
             "email" to "email",
-            "profileImage" to "profileImage"
+            "picture" to "profileImage"
         )
     }
 

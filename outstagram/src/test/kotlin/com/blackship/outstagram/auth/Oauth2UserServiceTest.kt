@@ -48,7 +48,7 @@ internal class Oauth2UserServiceTest {
                 resourceServerId = oAuth2User.name,
                 resourceServerName = oAuth2UserRequest.clientRegistration.clientName,
                 email = oAuth2User.getAttribute<String>("email")!!,
-                profileImage = oAuth2User.getAttribute<String>("profileImage")!!
+                profileImage = oAuth2User.getAttribute<String>("picture")!!
             )
         )
     }

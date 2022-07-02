@@ -21,7 +21,7 @@ class Oauth2UserService(
                     resourceServerId = oAuth2User.name,
                     resourceServerName = userRequest.clientRegistration.clientName,
                     email = oAuth2User.getAttribute<String>("email")!!,
-                    profileImage = oAuth2User.getAttribute<String>("profileImage")!!
+                    profileImage = oAuth2User.getAttribute<String>("picture")!!
                 )
             )
         return oAuth2User
