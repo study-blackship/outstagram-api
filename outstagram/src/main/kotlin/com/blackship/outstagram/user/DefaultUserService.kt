@@ -19,9 +19,12 @@ class DefaultUserService(
     override fun getUserByResourceServer(
         resourceServerName: String,
         resourceServerId: String
-    ): UserDto {
-        val user = userRepository.findByResourceServerNameAndResourceServerId(resourceServerName, resourceServerId) ?: throw NoSuchElementException("no matching user")
-        return userMapper.toDtoBy(user)
+    ): UserDto? {
+        val user = userRepository.findByResourceServerNameAndResourceServerId(resourceServerName, resourceServerId)
+        return if (user == null)
+            null
+        else
+            userMapper.toDtoBy(user)
     }
 
 }

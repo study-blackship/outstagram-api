@@ -7,6 +7,6 @@ interface UserService {
     fun getUserByResourceServer(
         resourceServerName: String,
         resourceServerId: String
-    ): UserDto
+    ): UserDto?
 
 }
