@@ -23,14 +23,14 @@ internal class DefaultUserServiceTest {
 
     @Test
     fun registerUser_callsToDomainBy_inUserMapper() {
-        val userDto = getUserDtoDummy()
+        val userDto = getUserDto()
         defaultUserService.registerUser(userDto)
         assertThat(spyUserMapper.toDomainByArguments).isEqualTo(userDto)
     }
 
     @Test
     fun registerUser_callsSave_inUserRepository() {
-        defaultUserService.registerUser(getUserDtoDummy())
+        defaultUserService.registerUser(getUserDto())
         assertThat(spyUserRepository.saveArguments).isEqualTo(spyUserMapper.toDomainByResult)
     }
 

@@ -1,5 +1,6 @@
 package com.blackship.outstagram.auth
 
+import com.blackship.outstagram.user.UserDto
 import com.blackship.outstagram.user.UserService
 import org.springframework.stereotype.Component
 
@@ -26,7 +27,13 @@ class DefaultUserServiceClient(
     }
 
     override fun registerUser(authUserDto: AuthUserDto) {
-
+        val userDto = UserDto(
+            resourceServerId = authUserDto.resourceServerId,
+            resourceServerName = authUserDto.resourceServerName,
+            email = authUserDto.email,
+            profileImage = authUserDto.profileImage
+        )
+        userService.registerUser(userDto)
     }
 
 }

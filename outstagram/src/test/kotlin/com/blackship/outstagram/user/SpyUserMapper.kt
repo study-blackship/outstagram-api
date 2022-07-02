@@ -11,7 +11,7 @@ class SpyUserMapper: UserMapper() {
     }
 
     lateinit var toDtoByArguments: User
-    var toDtoByResult = getUserDtoDummy()
+    var toDtoByResult = getUserDto()
     override fun toDtoBy(user: User): UserDto {
         toDtoByArguments = user
         return toDtoByResult

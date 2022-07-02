@@ -1,5 +1,7 @@
 package com.blackship.outstagram.auth
 
+import com.blackship.outstagram.user.getAuthUserDto
+import com.blackship.outstagram.user.getUserDto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -44,6 +46,20 @@ internal class DefaultUserServiceClientTest {
         spyUserService.getUserByResourceServerReturns = null
         val authUserDto = defaultUserServiceClient.getUserBy("resourceServerName", "resourceServerId")
         assertThat(authUserDto).isNull()
+    }
+
+    @Test
+    fun registerUser_register_user_by_userService() {
+        val authUserDto = getAuthUserDto()
+        defaultUserServiceClient.registerUser(authUserDto)
+        val userDto = getUserDto(
+            id = null,
+            resourceServerId = authUserDto.resourceServerId,
+            resourceServerName = authUserDto.resourceServerName,
+            email = authUserDto.email,
+            profileImage = authUserDto.profileImage
+        )
+        assertThat(spyUserService.registerUserArguments).isEqualTo(userDto)
     }
 
 }

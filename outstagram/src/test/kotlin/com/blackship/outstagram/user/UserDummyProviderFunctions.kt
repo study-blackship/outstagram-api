@@ -21,7 +21,7 @@ internal fun getUserDummy(
     _profileImage = profileImage,
 )
 
-internal fun getUserDtoDummy(
+internal fun getUserDto(
     id: Long? = 1L,
     resourceServerId: String = "resourceServerId",
     resourceServerName: String = "resourceServerName",
