@@ -30,13 +30,20 @@ internal class DefaultUserServiceClientTest {
     fun getUserBy_returnsAuthUserDto_isConverted_fromUserDto() {
         val resourceServerName = "resourceServerName"
         val resourceServerId = "resourceServerId"
-        val authUserDto = defaultUserServiceClient.getUserBy(resourceServerName, resourceServerId)
-        val userDto = spyUserService.getUserByResourceServerReturns
+        val authUserDto = defaultUserServiceClient.getUserBy(resourceServerName, resourceServerId)!!
+        val userDto = spyUserService.getUserByResourceServerReturns!!
         assertThat(authUserDto.id).isEqualTo(userDto.id)
         assertThat(authUserDto.email).isEqualTo(userDto.email)
         assertThat(authUserDto.profileImage).isEqualTo(userDto.profileImage)
         assertThat(authUserDto.resourceServerId).isEqualTo(userDto.resourceServerId)
         assertThat(authUserDto.resourceServerName).isEqualTo(userDto.resourceServerName)
+    }
+
+    @Test
+    fun getUserBy_returnsNull_when_getUserByResourceServer_is_null() {
+        spyUserService.getUserByResourceServerReturns = null
+        val authUserDto = defaultUserServiceClient.getUserBy("resourceServerName", "resourceServerId")
+        assertThat(authUserDto).isNull()
     }
 
 }

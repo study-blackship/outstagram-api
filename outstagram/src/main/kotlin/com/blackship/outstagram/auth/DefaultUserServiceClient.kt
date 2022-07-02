@@ -11,15 +11,22 @@ class DefaultUserServiceClient(
     override fun getUserBy(
         resourceServerName: String,
         resourceServerId: String
-    ): AuthUserDto {
+    ): AuthUserDto? {
         val userDto = userService.getUserByResourceServer(resourceServerName, resourceServerId)
-        return AuthUserDto(
-            id = userDto.id,
-            resourceServerId = userDto.resourceServerId,
-            resourceServerName = userDto.resourceServerName,
-            email = userDto.email,
-            profileImage = userDto.profileImage
-        )
+        return if (userDto == null)
+            null
+        else
+            AuthUserDto(
+                id = userDto.id,
+                resourceServerId = userDto.resourceServerId,
+                resourceServerName = userDto.resourceServerName,
+                email = userDto.email,
+                profileImage = userDto.profileImage
+            )
+    }
+
+    override fun registerUser(authUserDto: AuthUserDto) {
+
     }
 
 }

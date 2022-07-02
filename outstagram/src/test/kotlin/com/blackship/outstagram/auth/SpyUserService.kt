@@ -8,7 +8,7 @@ class SpyUserService: UserService {
 
     lateinit var getUserByResourceServerArgumentsResourceServerName: String
     lateinit var getUserByResourceServerArgumentsResourceServerId: String
-    var getUserByResourceServerReturns = getUserDtoDummy()
+    var getUserByResourceServerReturns: UserDto? = getUserDtoDummy()
 
     override fun registerUser(userDto: UserDto) {
         TODO("Not yet implemented")
@@ -17,7 +17,7 @@ class SpyUserService: UserService {
     override fun getUserByResourceServer(
         resourceServerName: String,
         resourceServerId: String
-    ): UserDto {
+    ): UserDto? {
         getUserByResourceServerArgumentsResourceServerName = resourceServerName
         getUserByResourceServerArgumentsResourceServerId = resourceServerId
         return getUserByResourceServerReturns
