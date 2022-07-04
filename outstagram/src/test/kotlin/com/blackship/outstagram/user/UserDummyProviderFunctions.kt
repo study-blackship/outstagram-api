@@ -50,7 +50,7 @@ internal fun getOAuth2UserRequest() = OAuth2UserRequest(
 )
 
 fun getAuthUserDto(
-    id: Long? = null,
+    id: Long? = 1,
     resourceServerId: String = "resourceServerId",
     resourceServerName: String = "resourceServerName",
     email: String = "email",

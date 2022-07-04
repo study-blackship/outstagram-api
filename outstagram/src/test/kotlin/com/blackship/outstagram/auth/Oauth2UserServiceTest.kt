@@ -60,10 +60,9 @@ internal class Oauth2UserServiceTest {
     }
 
     @Test
-    fun loadUser_returns_OAuth2User() {
+    fun loadUser_returns_AuthenticatedOAuth2User_type() {
         val oAuth2User = oauth2UserService.loadUser(getOAuth2UserRequest())
-        val expectedOAuth2User = spyDefaultOauth2UserService.loadUserResult
-        assertThat(oAuth2User).isEqualTo(expectedOAuth2User)
+        assertThat(oAuth2User is AuthenticatedOAuth2User).isTrue
     }
 
 }
