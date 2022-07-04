@@ -4,6 +4,6 @@ interface UserServiceClient {
 
     fun getUserBy(resourceServerName: String, resourceServerId: String): AuthUserDto?
 
-    fun registerUser(authUserDto: AuthUserDto)
+    fun registerUser(authUserDto: AuthUserDto): AuthUserDto
 
 }

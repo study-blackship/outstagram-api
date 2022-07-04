@@ -26,14 +26,21 @@ class DefaultUserServiceClient(
             )
     }
 
-    override fun registerUser(authUserDto: AuthUserDto) {
+    override fun registerUser(authUserDto: AuthUserDto): AuthUserDto {
         val userDto = UserDto(
             resourceServerId = authUserDto.resourceServerId,
             resourceServerName = authUserDto.resourceServerName,
             email = authUserDto.email,
             profileImage = authUserDto.profileImage
         )
-        userService.registerUser(userDto)
+        val user = userService.registerUser(userDto)
+        return AuthUserDto(
+            id = user.id,
+            resourceServerId = user.resourceServerId,
+            resourceServerName = user.resourceServerName,
+            email = user.email,
+            profileImage = user.profileImage
+        )
     }
 
 }

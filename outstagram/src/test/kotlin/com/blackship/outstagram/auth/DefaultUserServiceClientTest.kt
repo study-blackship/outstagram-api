@@ -62,4 +62,18 @@ internal class DefaultUserServiceClientTest {
         assertThat(spyUserService.registerUserArguments).isEqualTo(userDto)
     }
 
+    @Test
+    fun registerUser_return_AuthUserDto_by_userService() {
+        val registerUser = defaultUserServiceClient.registerUser(getAuthUserDto())
+        val registerUserResult = spyUserService.registerUserResult
+        val authUserDto = AuthUserDto(
+            id = registerUserResult.id,
+            resourceServerId = registerUserResult.resourceServerId,
+            resourceServerName = registerUserResult.resourceServerName,
+            email = registerUserResult.email,
+            profileImage = registerUserResult.profileImage
+        )
+        assertThat(registerUser).isEqualTo(authUserDto)
+    }
+
 }

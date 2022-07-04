@@ -19,9 +19,10 @@ class SpyUserServiceClient: UserServiceClient {
     }
 
     var registerUserArguments: AuthUserDto? = null
-
-    override fun registerUser(authUserDto: AuthUserDto) {
+    var registerUserResult = getAuthUserDto()
+    override fun registerUser(authUserDto: AuthUserDto): AuthUserDto {
         registerUserArguments = authUserDto
+        return registerUserResult
     }
 
 }
