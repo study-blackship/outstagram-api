@@ -12,21 +12,18 @@ class Oauth2UserService(
     private val userServiceClient: UserServiceClient
 ): OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    override fun loadUser(userRequest: OAuth2UserRequest): AuthenticatedOAuth2User? {
+    override fun loadUser(userRequest: OAuth2UserRequest): AuthenticatedOAuth2User {
         val oAuth2User = defaultOAuth2UserService.loadUser(userRequest)
-        var userDto = userServiceClient.getUserBy(userRequest.clientRegistration.clientName, oAuth2User.name)
-        if (userDto == null) {
-            userServiceClient.registerUser(
-                AuthUserDto(
-                    resourceServerId = oAuth2User.name,
-                    resourceServerName = userRequest.clientRegistration.clientName,
-                    email = oAuth2User.getAttribute<String>("email")!!,
-                    profileImage = oAuth2User.getAttribute<String>("picture")!!
-                )
+        val userDto = userServiceClient.getUserBy(userRequest.clientRegistration.clientName, oAuth2User.name) ?: userServiceClient.registerUser(
+            AuthUserDto(
+                resourceServerId = oAuth2User.name,
+                resourceServerName = userRequest.clientRegistration.clientName,
+                email = oAuth2User.getAttribute<String>("email")!!,
+                profileImage = oAuth2User.getAttribute<String>("picture")!!
             )
-            userDto = userServiceClient.getUserBy(userRequest.clientRegistration.clientName, oAuth2User.name)
-        }
-        return AuthenticatedOAuth2User(target = oAuth2User, userId = 0)
+        )
+
+        return AuthenticatedOAuth2User(target = oAuth2User, userId = userDto.id!!)
     }
 
 }
