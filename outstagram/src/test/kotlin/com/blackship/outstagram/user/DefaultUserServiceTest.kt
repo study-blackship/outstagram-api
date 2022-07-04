@@ -61,4 +61,11 @@ internal class DefaultUserServiceTest {
         assertThat(defaultUserService.getUserByResourceServer("resourceServerName", "resourceServerId")).isNull()
     }
 
+    @Test
+    fun registerUser_return_UserDto_by_toDtoBy_in_UserMapper() {
+        val userDto = defaultUserService.registerUser(getUserDto())
+        val expectedUserDto = spyUserMapper.toDtoByResult
+        assertThat(userDto).isEqualTo(expectedUserDto)
+    }
+
 }

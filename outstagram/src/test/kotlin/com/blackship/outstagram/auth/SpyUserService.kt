@@ -11,8 +11,10 @@ class SpyUserService: UserService {
     var getUserByResourceServerReturns: UserDto? = getUserDto()
 
     lateinit var registerUserArguments: UserDto
-    override fun registerUser(userDto: UserDto) {
+    var registerUserResult = getUserDto()
+    override fun registerUser(userDto: UserDto): UserDto {
         registerUserArguments = userDto
+        return registerUserResult
     }
 
     override fun getUserByResourceServer(

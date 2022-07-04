@@ -10,9 +10,11 @@ class DefaultUserService(
     private val userMapper: UserMapper
 ): UserService {
 
-    override fun registerUser(userDto: UserDto) {
+    override fun registerUser(userDto: UserDto): UserDto {
         val user = userMapper.toDomainBy(userDto)
         userRepository.save(user)
+
+        return userMapper.toDtoBy(user)
     }
 
     @Transactional(readOnly = true)
