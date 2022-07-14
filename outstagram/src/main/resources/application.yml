@@ -26,3 +26,6 @@ spring:
     hikari:
       username: root
       password: password
+
+jwt:
+  secret: outstagram-asjhrcoawechsel4vtuh4esulvbhse4thvsk4
