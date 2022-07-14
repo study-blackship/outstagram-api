@@ -2,14 +2,12 @@ package com.blackship.outstagram.auth
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.Authentication
 import java.util.*
 
-class JwtTokenProvider: AuthenticationTokenProvider {
-
-    @Value("#{jwt.secret}")
-    private lateinit var jwtSecret: String
+class JwtTokenProvider(
+    private val jwtSecret: String
+): AuthenticationTokenProvider {
 
     override fun generateToken(authentication: Authentication): String {
         val authenticatedOAuth2User = authentication.principal as AuthenticatedOAuth2User
